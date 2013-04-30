@@ -8,4 +8,5 @@
   :java-source-paths ["src/java"]
   :ring {:handler stemmatic.handler/app}
   :profiles
-  {:dev {:dependencies [[ring-mock "0.1.3"]]}})
+  {:dev {:dependencies [[ring-mock "0.1.3"]]}}
+  :main stemmatic.core)
