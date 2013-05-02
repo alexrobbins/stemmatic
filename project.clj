@@ -2,7 +2,8 @@
   :description "Automatically compute document lineages"
   :url "https://github.com/alexrobbins/stemmatic"
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [compojure "1.1.5"]]
+                 [compojure "1.1.5"]
+                 [net.sf.jung/jung2 "2.0.1" :extension "pom"]]
   :plugins [[lein-ring "0.8.3"]]
   :source-paths ["src/clojure"]
   :java-source-paths ["src/java"]
