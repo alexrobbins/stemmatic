@@ -17,12 +17,12 @@
 
 (def docs
   [
-   {:name 1 :content "The dog ran."}
-   {:name 2 :content "The red dog ran."}
-   {:name 3 :content "The red dog ran."}
-   {:name 4 :content "The red dog ran quickly."}
-   {:name 5 :content "The red dog ran quickly home."}
-   {:name 6 :content "The red dog rat."}]
+   {:name "1" :content "The dog ran."}
+   {:name "2" :content "The red dog ran."}
+   {:name "3" :content "The red dog ran."}
+   {:name "4" :content "The red dog ran quickly."}
+   {:name "5" :content "The red dog ran quickly home."}
+   {:name "6" :content "The red dog rat."}]
   )
 
 (deftest test-deduplicate-documents
@@ -34,14 +34,26 @@
     (are
      [key-pair edge-value]
      (= (edges key-pair) edge-value)
-     [1 2] 4
-     [2 3] 0
-     [1 3] 4
-     [1 4] 12
-     [2 4] 8
+     ["1" "2"] 4
+     ["2" "3"] 0
+     ["1" "3"] 4
+     ["1" "4"] 12
+     ["2" "4"] 8
      )))
+
+(deftest test-mst->dot
+  (is
+   (= (mst->dot (get-tree docs)))
+   (str
+    "graph stemma {"
+    "  \"1\" -- \"2\""
+    "  \"2\" -- \"6\""
+    "  \"2\" -- \"4\""
+    "  \"4\" -- \"5\""
+    "}")
+   ))
 
 (deftest test-get-tree
   (is
-   (= (get-tree docs)
-      #{[1 2] [2 6] [2 4] [4 5]})))
+   (= (get-tree (deduplicate-documents docs))
+      #{["1" "2"] ["2" "6"] ["2" "4"] ["4" "5"]})))

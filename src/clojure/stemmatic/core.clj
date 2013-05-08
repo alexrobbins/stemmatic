@@ -28,8 +28,7 @@
 (defn get-tree
   "Given a list of documents, return the probable tree of documents."
   [docs]
-  (let [docs (deduplicate-documents docs)
-        doc-names (map :name docs)
+  (let [doc-names (map :name docs)
         edges (get-edges docs)]
     (get-mst doc-names edges)))
 
@@ -40,8 +39,21 @@
        (filter (memfn isFile)
                (file-seq (file directory)))))
 
+(defn mst->dot
+  "Convert the documents and a minimum spanning tree to a dot file for command
+   line usage."
+  [mst]
+  (str
+   (apply str "graph stemma {\n"
+          (map (fn [[n1 n2]] (str "\"" n1 "\" -- \"" n2 "\"\n")) mst))
+   "}")
+  )
+
 (defn -main
-  "Call get-tree on the documents in the given directory."
+  "Call get-tree on the documents in the given directory, returns a dot file of
+   a probably document tree."
   [directory & args]
-  (let [files (get-files directory)]
-    (get-tree files)))
+  (let [files (get-files directory)
+        docs  (deduplicate-documents files)
+        mst   (get-tree docs)]
+    (println (mst->dot mst))))
