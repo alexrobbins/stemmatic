@@ -4,15 +4,15 @@
 
 (defn render-graph
   "Render the graph of the document stemma."
-  []
+  [state]
   "Main graph")
 
 (defn render-doc
   "Render the document."
-  [doc-name]
+  [docs doc-name]
   doc-name)
 
 (defn render-diff
   "Render the diff of the two documents."
-  [doc-name-1 doc-name-2]
+  [docs doc-name-1 doc-name-2]
   (str "Diff of " doc-name-1 " and " doc-name-2))
