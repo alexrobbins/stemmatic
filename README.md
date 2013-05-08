@@ -1,6 +1,6 @@
 # stemmatic
 
-Automatically compute document lineages
+Automatically compute document stemma. https://en.wikipedia.org/wiki/Textual_criticism#Stemmatics
 
 ## Prerequisites
 
