@@ -40,3 +40,8 @@
      [1 4] 12
      [2 4] 8
      )))
+
+(deftest test-get-tree
+  (is
+   (= (get-tree docs)
+      #{[1 2] [2 6] [2 4] [4 5]})))

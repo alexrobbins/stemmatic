@@ -21,10 +21,10 @@
      :d #{:a :c} #{[[:b :d] 1]}
      )))
 
-(deftest test-prims
+(deftest test-get-mst
   (are
    [nodes edges mst]
-   (= (prims nodes edges) mst)
+   (= (get-mst nodes edges) mst)
    #{}         {}                                #{}
    #{:a :b}    {[:a :b] 1}                       #{[:a :b]}
    #{:a :b :c} {[:a :b] 1, [:b :c] 1, [:a :c] 5} #{[:a :b] [:b :c]}

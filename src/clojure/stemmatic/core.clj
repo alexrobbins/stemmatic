@@ -1,5 +1,6 @@
 (ns stemmatic.core
-  (:require [clojure.java.io :refer (file)])
+  (:require [clojure.java.io :refer (file)]
+            [stemmatic.graph :refer (get-mst)])
   (:import [name.fraser.neil.plaintext diff_match_patch]))
 
 (defn deduplicate-documents
@@ -28,9 +29,9 @@
   "Given a list of documents, return the probable tree of documents."
   [docs]
   (let [docs (deduplicate-documents docs)
+        doc-names (map :name docs)
         edges (get-edges docs)]
-    docs
-    ))
+    (get-mst doc-names edges)))
 
 (defn get-files
   "Get a seq of strings, which are the content of the files in a given directory."

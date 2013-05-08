@@ -10,7 +10,7 @@
         :let [k (vec (sort [node n]))]]
     [k (edges k)]))
 
-(defn prims
+(defn get-mst
   "Execute Prim's algorithm on the given graph. Return a minimum
    spanning tree of edges. (The nodes are the same.)"
   [nodes edges]
