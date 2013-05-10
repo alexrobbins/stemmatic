@@ -16,13 +16,13 @@
    ))
 
 (def docs
-  [
-   {:name "1" :content "The dog ran."}
-   {:name "2" :content "The red dog ran."}
-   {:name "3" :content "The red dog ran."}
-   {:name "4" :content "The red dog ran quickly."}
-   {:name "5" :content "The red dog ran quickly home."}
-   {:name "6" :content "The red dog rat."}]
+  {
+   "1" {:content "The dog ran."}
+   "2" {:content "The red dog ran."}
+   "3" {:content "The red dog ran."}
+   "4" {:content "The red dog ran quickly."}
+   "5" {:content "The red dog ran quickly home."}
+   "6" {:content "The red dog rat."}}
   )
 
 (deftest test-deduplicate-documents
