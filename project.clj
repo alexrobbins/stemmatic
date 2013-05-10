@@ -1,5 +1,5 @@
 (defproject stemmatic "0.1.0-SNAPSHOT"
-  :description "Automatically compute document stemma"
+  :description "Automatically compute document stemmata"
   :url "https://github.com/alexrobbins/stemmatic"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/data.priority-map "0.0.2"]

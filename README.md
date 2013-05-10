@@ -1,6 +1,6 @@
 # stemmatic
 
-Automatically compute document stemma. https://en.wikipedia.org/wiki/Textual_criticism#Stemmatics
+Automatically compute document stemmata. https://en.wikipedia.org/wiki/Textual_criticism#Stemmatics
 
 ## Prerequisites
 
