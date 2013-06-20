@@ -5,14 +5,15 @@
 (defn deduplicate-documents
   "Collapse identical documents into a single doc with aliases"
   [docs]
-  (let [doc-map (group-by #(.hashCode (:content (second %))) docs)]
-    (into {}
-          (for [[_ same-docs] doc-map]
-            [(:name (ffirst same-docs)) {:content (:content (second (first same-docs)))
-                                         :aliases (set
-                                                   (concat
-                                                    (map :name same-docs)
-                                                    ))}]))))
+  (let [doc-map (group-by #(.hashCode (:content %)) docs)]
+    (for [[_ same-docs] doc-map :let [first-doc (first same-docs)]]
+      (assoc first-doc
+        :aliases (->
+                  (concat
+                   (map :name same-docs)
+                   (mapcat :aliases same-docs))
+                  set
+                  (disj (:name first-doc)))))))
 
 (defn get-weight
   "Get the levenshtein distance between two strings"
@@ -24,15 +25,14 @@
   "Calculate the weight of the edges between the documents."
   [docs]
   (into {}
-        (for [d1 docs d2 docs
-              :let [n1 (first d1) n2 (first d2)]
-              :when (> 0 (compare n1 n2))]
+        (for [{n1 :name d1 :content} docs {n2 :name d2 :content} docs
+              :when (neg? (compare n1 n2))]
           [[n1 n2]
-           (get-weight (:content (second d1)) (:content (second d2)))])))
+           (get-weight d1 d2)])))
 
 (defn get-tree
-  "Given a list of documents, return the probable tree of documents."
+  "Given a list of documents, return a probable tree of documents."
   [docs]
-  (let [doc-names (keys docs)
+  (let [doc-names (map :name docs)
         edges (get-edges docs)]
     (get-mst doc-names edges)))

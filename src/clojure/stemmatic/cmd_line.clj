@@ -5,10 +5,9 @@
 (defn get-files
   "Get the documents from the given directory."
   [directory]
-  (into {}
-        (map (fn [in-file] [(.getName in-file) {:content (slurp in-file)}])
-             (filter (memfn isFile)
-                     (file-seq (file directory))))))
+  (map (fn [in-file] {:name (.getName in-file) :content (slurp in-file)})
+       (filter (memfn isFile)
+               (file-seq (file directory)))))
 
 (defn mst->dot
   "Convert the documents and a minimum spanning tree to a dot file for command

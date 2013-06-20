@@ -1,6 +1,23 @@
 (ns stemmatic.test.core
   (:require [clojure.test :refer :all]
             [stemmatic.core :refer :all]))
+(def docs
+  [
+   {:name "1" :content "The dog ran."}
+   {:name "2" :content "The red dog ran."}
+   {:name "3" :content "The red dog ran."}
+   {:name "4" :content "The red dog ran quickly."}
+   {:name "5" :content "The red dog ran quickly home."}
+   {:name "6" :content "The red dog rat."}]
+  )
+
+(deftest test-deduplicate-documents
+  (let [dd (deduplicate-documents docs)]
+    (is
+     (= (count dd) 5))
+    (is
+     (= (:aliases (first (filter #(= "2" (:name %)) dd)))
+        #{"3"}))))
 
 (deftest test-get-weight
   (are
@@ -14,24 +31,6 @@
    "The dog" "The dog ran" 4
    "The dog ran" "The red dog ran" 4
    ))
-
-(def docs
-  {
-   "1" {:content "The dog ran."}
-   "2" {:content "The red dog ran."}
-   "3" {:content "The red dog ran."}
-   "4" {:content "The red dog ran quickly."}
-   "5" {:content "The red dog ran quickly home."}
-   "6" {:content "The red dog rat."}}
-  )
-
-(deftest test-deduplicate-documents
-  (let [dd (deduplicate-documents docs)]
-    (is
-     (= (count dd) 5))
-    (is
-     (= (:aliases ("2" dd))
-        #{"2" "3"}))))
 
 (deftest test-get-edges
   (let [edges (get-edges docs)]
