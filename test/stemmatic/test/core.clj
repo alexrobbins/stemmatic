@@ -26,8 +26,12 @@
   )
 
 (deftest test-deduplicate-documents
-  (is
-   (= (count (deduplicate-documents docs)) 5)))
+  (let [dd (deduplicate-documents docs)]
+    (is
+     (= (count dd) 5))
+    (is
+     (= (:aliases ("2" dd))
+        #{"2" "3"}))))
 
 (deftest test-get-edges
   (let [edges (get-edges docs)]
@@ -40,18 +44,6 @@
      ["1" "4"] 12
      ["2" "4"] 8
      )))
-
-(deftest test-mst->dot
-  (is
-   (= (mst->dot (get-tree docs)))
-   (str
-    "graph stemma {"
-    "  \"1\" -- \"2\""
-    "  \"2\" -- \"6\""
-    "  \"2\" -- \"4\""
-    "  \"4\" -- \"5\""
-    "}")
-   ))
 
 (deftest test-get-tree
   (is

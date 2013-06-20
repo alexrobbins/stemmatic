@@ -18,4 +18,4 @@
      :compiler {:output-to "resources/public/js/main.js"
                 :optimizations :whitespace
                 :pretty-print true}}]}
-  :main stemmatic.core)
+  :main stemmatic.cmd-line)
