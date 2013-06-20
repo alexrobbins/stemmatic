@@ -6,7 +6,7 @@
   "Render the graph of the document stemma."
   [state]
   (list
-   (when-not (empty? state)
+   (when-not (empty? (:docs state))
      "Main graph")
    "Upload docs form"))
 
@@ -22,7 +22,7 @@
          [:div (apply str (interpose ", " aliases))])
        [:pre
         (docs doc-name)]))
-    nil))
+    {:status 404 :body "Document not found."}))
 
 (defn render-diff
   "Render the diff of the two documents."
