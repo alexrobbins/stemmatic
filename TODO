@@ -1,0 +1,6 @@
+Make web front end in ClojureScript.
+Use liberator to make a rest api the clojurescript front end can
+   interact with.
+Store documents in a datomic db.
+When first starting the app, ask for a save file to load existing state.
+Split database logic out of web logic.
