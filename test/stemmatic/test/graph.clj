@@ -2,6 +2,18 @@
   (:require [clojure.test :refer :all]
             [stemmatic.graph :refer :all]))
 
+(defrecord DummyNode [id x-position]
+  Node
+  (distance [this other] (java.lang.Math/abs (- x-position (:x-position other))))
+  (id [this] id))
+
+(deftest test-nodes->edges
+  (are
+   [nodes edges]
+   (= (set (nodes->edges (map #(apply ->DummyNode %) nodes))) (set edges))
+   [[:a 0] [:b 1]] [[[:a :b] 1]]
+   [[:a 0] [:b 1] [:c 2]] [[[:a :b] 1] [[:a :c] 2] [[:b :c] 1]]))
+
 (deftest test-get-edges
   (let [nodes #{:a :b :c :d}
         edges {[:a :b] 1

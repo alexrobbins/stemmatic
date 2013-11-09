@@ -3,6 +3,24 @@
    running algorithms across it."
   (:require [clojure.data.priority-map :refer (priority-map)]))
 
+(defprotocol Node
+  "A node is any object that knows how close it is to other nodes. The distance
+   should be commutative. (= (distance a b) (distance b a)). Nodes also provide an
+   identifier."
+  (id [this] "The identifier of this node.")
+  (distance [this other] "The distance between this node and the other node."))
+
+(defn nodes->edges
+  "Calculate the the edges and their distances between the nodes."
+  [nodes]
+  (into {}
+        (for [n1 nodes
+              :let [id1 (id n1)]
+              n2 nodes
+              :let [id2 (id n2)]
+              :when (neg? (compare id1 id2))]
+          [[id1 id2] (distance n1 n2)])))
+
 (defn get-edges
   "Get the edges containing a node, minus edges to already covered nodes.."
   [node nodes edges covered-nodes]
