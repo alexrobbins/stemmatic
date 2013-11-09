@@ -25,7 +25,7 @@
   [doc]
   (dosync
    (let [docs (conj (vals (:docs @state)) doc)]
-     (swap! state (constantly {:docs (deduplicate-documents docs)})))))
+     (reset! state {:docs (deduplicate-documents docs)}))))
 
 (defroutes app-routes
   (GET "/" [] (render-graph @state))
