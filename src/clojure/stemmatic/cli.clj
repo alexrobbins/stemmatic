@@ -1,6 +1,6 @@
 (ns stemmatic.cli
-  (:require [clojure.java.io :refer (file)]
-            [stemmatic.core :refer (deduplicate-documents get-tree)]))
+  (:require [clojure.java.io :refer [file]]
+            [stemmatic.documents :refer [deduplicate-documents get-tree]]))
 
 (defn get-files
   "Get the documents from the given directory."

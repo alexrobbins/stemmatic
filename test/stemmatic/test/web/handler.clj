@@ -1,7 +1,7 @@
-(ns stemmatic.test.handler
+(ns stemmatic.test.web.handler
   (:require [clojure.test :refer :all]
             [ring.mock.request :refer :all]
-            [stemmatic.handler :refer :all]))
+            [stemmatic.web.handler :refer :all]))
 
 (deftest test-get-docs
   (is (empty? (get-docs))))

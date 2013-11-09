@@ -1,6 +1,8 @@
-(ns stemmatic.renderer
+(ns stemmatic.web.renderer
   (:require [hiccup.core :refer (html)])
   (:import [name.fraser.neil.plaintext diff_match_patch]))
+
+(def dmp (diff_match_patch.))
 
 (defn render-graph
   "Render the graph of the document stemma."

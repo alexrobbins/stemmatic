@@ -1,12 +1,11 @@
-(ns stemmatic.handler
+(ns stemmatic.web.handler
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [stemmatic.core :refer (deduplicate-documents get-tree)]
-            [stemmatic.renderer :refer (render-graph render-doc render-diff list-docs)]))
+            [stemmatic.documents :refer [deduplicate-documents get-tree]]
+            [stemmatic.web.renderer :refer [render-graph render-doc render-diff list-docs]]))
 
-
-(def ^:private state (atom {:docs {}}))
+(defonce ^:private state (atom {:docs {}}))
 
 (defn get-docs
   "Return the documents in the working set."

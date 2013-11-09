@@ -9,7 +9,7 @@
             [lein-ring "0.8.3"]]
   :source-paths ["src/clojure"]
   :java-source-paths ["src/java"]
-  :ring {:handler stemmatic.handler/app}
+  :ring {:handler stemmatic.web.handler/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]]}}
   :cljsbuild
@@ -18,4 +18,4 @@
      :compiler {:output-to "resources/public/js/main.js"
                 :optimizations :whitespace
                 :pretty-print true}}]}
-  :main stemmatic.cmd-line)
+  :main stemmatic.cli)

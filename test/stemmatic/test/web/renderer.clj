@@ -1,6 +1,6 @@
-(ns stemmatic.test.renderer
+(ns stemmatic.test.web.renderer
   (:require [clojure.test :refer :all]
-            [stemmatic.renderer :refer :all]))
+            [stemmatic.web.renderer :refer :all]))
 
 (def state {:docs {"a" {:name "a" :content "Doc a"}
                    "b" {:name "b" :content "Doc b"}}})
