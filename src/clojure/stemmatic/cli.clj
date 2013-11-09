@@ -1,4 +1,4 @@
-(ns stemmatic.cmd-line
+(ns stemmatic.cli
   (:require [clojure.java.io :refer (file)]
             [stemmatic.core :refer (deduplicate-documents get-tree)]))
 
@@ -20,7 +20,7 @@
 
 (defn -main
   "Call get-tree on the documents in the given directory, returns a dot file of
-   a probably document tree."
+   a probable document tree."
   [directory & args]
   (let [files (get-files directory)
         docs  (deduplicate-documents files)

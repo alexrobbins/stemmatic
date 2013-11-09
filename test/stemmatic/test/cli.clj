@@ -1,6 +1,6 @@
-(ns stemmatic.test.cmd-line
+(ns stemmatic.test.cli
   (:require [clojure.test :refer :all]
-            [stemmatic.cmd-line :refer :all]))
+            [stemmatic.cli :refer :all]))
 
 (deftest test-mst->dot
   (is
@@ -11,5 +11,4 @@
     "  \"2\" -- \"6\""
     "  \"2\" -- \"4\""
     "  \"4\" -- \"5\""
-    "}")
-   ))
+    "}")))
