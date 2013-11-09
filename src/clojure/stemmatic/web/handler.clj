@@ -17,7 +17,7 @@
   [documents]
   (let [docs    (deduplicate-documents documents)
         doc-map (into {} (for [{name :name :as d} docs] [name d]))]
-    (swap! state (constantly {:docs doc-map}))))
+    (reset! state {:docs doc-map})))
 
 (defn add-doc
   "Add a document to the working set. Drop any cached mst if it exists."
