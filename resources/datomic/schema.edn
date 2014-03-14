@@ -1,0 +1,80 @@
+;; documents
+[{:db/id #db/id[:db.part/db]
+  :db/ident :document/title
+  :db/doc "The title of the document."
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/fulltext true
+  :db/index true
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :document/text
+  :db/doc "The text of the document."
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/fulltext true
+  :db/index true
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :document/source
+  :db/doc "The source of the document."
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/fulltext true
+  :db/index true
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :document/image
+  :db/doc "Path to image of the document."
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}]
+
+;; edges
+[{:db/id #db/id[:db.part/db]
+  :db/ident :edge/doc-1
+  :db/doc "One of this edge's documents."
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :edge/doc-2
+  :db/doc "One of this edge's documents."
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :edge/distance
+  :db/doc "Distance between connected documents."
+  :db/valueType :db.type/double
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :edge/directed
+  :db/doc "Is this a directed edge?"
+  :db/valueType :db.type/boolean
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :edge/source
+  :db/doc "User created or system generated?"
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/user -1]
+  :db/ident :edge.source/user}
+ {:db/id #db/id[:db.part/user -2]
+  :db/ident :edge.source/system}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :edge/notes
+  :db/doc "Notes on this edge."
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/fulltext true
+  :db/index true
+  :db.install/_attribute :db.part/db}]
+
+;; add the stemmatic partition
+[{:db/id #db/id[:db.part/db]
+  :db/ident :stemmatic
+  :db.install/_partition :db.part/db}]
