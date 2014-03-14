@@ -2,7 +2,7 @@
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [stemmatic.graph :refer [distance get-mst nodes->edges Node]])
+            [stemmatic.graph :refer [distance get-mst Node]])
   (:import [name.fraser.neil.plaintext diff_match_patch]))
 
 (def dmp (diff_match_patch.))
@@ -18,9 +18,7 @@
 (defn get-tree
   "Given a list of documents, return a probable tree of documents."
   [docs]
-  (let [doc-ids (map :id docs)
-        edges (nodes->edges docs)]
-    (get-mst doc-ids edges)))
+  (get-mst docs))
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Web api

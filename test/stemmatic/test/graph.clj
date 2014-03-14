@@ -35,12 +35,11 @@
 
 (deftest test-get-mst
   (are
-   [nodes edges mst]
-   (= (get-mst nodes edges) mst)
-   #{}         {}                                #{}
-   #{:a :b}    {[:a :b] 1}                       #{[:a :b]}
-   #{:a :b :c} {[:a :b] 1, [:b :c] 1, [:a :c] 5} #{[:a :b] [:b :c]}
-   #{:a :b :c} {[:a :b] 1, [:b :c] 3, [:a :c] 5} #{[:a :b] [:b :c]}
-   #{:a :b :c} {[:a :b] 3, [:b :c] 3, [:a :c] 5} #{[:a :b] [:b :c]}
-   #{:a :b :c} {[:a :b] 7, [:b :c] 3, [:a :c] 5} #{[:a :c] [:b :c]}
-   ))
+   [nodes mst]
+   (= (get-mst (map #(apply ->DummyNode %) nodes)) mst)
+   []                                        #{}
+   [[:a 0] [:b 1]]    #{[:a :b]}
+   [[:a 0] [:b 1] [:c 2]] #{[:a :b] [:b :c]}
+   [[:a 0] [:b 1] [:c 4]] #{[:a :b] [:b :c]}
+   [[:a 0] [:b 3] [:c 6]] #{[:a :b] [:b :c]}
+   [[:a 0] [:b 7] [:c 3]] #{[:a :c] [:b :c]}))
